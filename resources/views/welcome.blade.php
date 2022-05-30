@@ -81,7 +81,7 @@
 
                 {{-- section_3 --}}
 
-                <h2 class="content-hdr text-center card">
+                <h2 class="content-hdr text-center" style="  margin-bottom: 30px;margin-top: 30px;">
                     Featured Collections</h2>
 
                 <section class="collections no-scroll-bar scrolling-wrapper scroll-border ">
