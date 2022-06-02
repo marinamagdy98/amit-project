@@ -8,9 +8,13 @@
                     <div class="product-grid">
                         <div class="product-image">
                             <a class="image">
-                                <img class="pic-1"
+                                <img class="pic-1" 
                                     src="{{ URL::asset('upload_product') }}/{{ $product->product_photo }}">
                             </a>
+              
+                        <div class="product-content">
+                            <h3 class="title"><a>{{ $product->product_name }} </a></h3>
+                           
                             <div class="price"> {{ $product->product_price }} </div>
                             @if (Auth::user() != 'login')
                             <form action="">
@@ -19,11 +23,6 @@
   
                             @endif
                         </div>
-                        <div class="product-content">
-                            <h3 class="title"><a>{{ $product->product_name }} </a></h3>
-                            <ul class="rating">
-                                <a class="btn btn-primary mt-2">Buy </a>
-                            </ul>
                         </div>
                     </div>
                 </div>

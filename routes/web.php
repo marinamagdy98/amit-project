@@ -29,13 +29,17 @@ Route::get('/', function () {
 });
 Route::resource('Admin', AdminController::class)->middleware(['auth','isadmin']);
 Route::resource('categories', CategoryController::class);
+Route::resource('/products', ProductsController::class);
+
 
 //cart routes
 
 Route::delete('remove-from-cart', [CartController::class,'remove']);
 Route::get('cart', [CartController::class,'cart']);
 Route::get('add-to-cart/{id}', [CartController::class,'addToCart']);
+Route::get('remove-from-cart/{id}', [CartController::class,'removeFromCard'])->name('removeFromCard');
 
+Route::get('/Admin/remove/{id}', [AdminController::class,'remove'])->name('Admin.remove');
 
 //profile & search route
 
@@ -47,5 +51,5 @@ Auth::routes(['verify'=>true]);
 
 Route::post('/changePasswordPost',[App\Http\Controllers\Auth\ResetPasswordController::class])->name('changePasswordPost');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products');
+//Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products');
 

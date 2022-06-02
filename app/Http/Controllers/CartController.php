@@ -65,4 +65,13 @@ class CartController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
+
+    public function removeFromCard($id){
+       // return "done";
+       $cart = session()->get('cart');
+      $cart[$id]['quantity']--;
+      session()->put('cart', $cart);
+      //return $minus;
+       return redirect()->back()->with('removeItem', 'item removed successfully!');
+    }
 }

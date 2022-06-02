@@ -18,7 +18,7 @@
     <td>{{$category->category_name}}</td>
     <td>
         @if (Auth::user()->role_id==1)
-        <a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning">Edit</a>
+        {{-- <a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning">Edit</a> --}}
         <form action="{{route('categories.destroy',$category->id)}}" method="post" class="d-inline">
         @csrf
         @method('DELETE')

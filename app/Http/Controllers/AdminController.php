@@ -87,16 +87,34 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $product=Product::find($id);
-        //return $request;
-        $new_price=$request->new_price;
-        $new_price==null ? $store=$product->product_price : $store=$new_price ;
-        $product->update([
-            "product_price"=>$new_price,
-        ]);
-        return redirect()->back()->with('status' , 'product edit');
+    { 
+        $product=Product::findOrFail($id);
+        $file_extension = $request->new_image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'upload_product';
+        $request->new_image->move($path, $file_name);
 
+        $product->update([
+            'product_name' => $request->new_name,
+            'product_price' => $request->new_price,
+            'product_photo' => $file_name,
+        ]);
+        return redirect()->back()->with('status' , 'thank you for edit');
+
+    }
+
+    public function remove($id)
+    {
+        return redirect()->back()->with('confirm' ,$id);
+        //return "done";
+        // if($request->id) {
+        //     $cart = session()->get('cart');
+        //     if(isset($cart[$request->id])) {
+        //         unset($cart[$request->id]);
+        //         session()->put('cart', $cart);
+        //     }
+        //     session()->flash('success', 'Product removed successfully');
+        // }
     }
 
     /**
@@ -109,6 +127,8 @@ class AdminController extends Controller
     {
         //
       //  return "done";
+     // return redirect()->back()->with('confirm', 'Are you sure !');
+
       $Product = Product::find($id);
       $img_destination = 'upload_Product/' . $Product->product_photo;
       
@@ -117,5 +137,9 @@ class AdminController extends Controller
       }
       $Product->delete();
       return redirect()->back();
+    }
+    public function confirm(){
+      //  return redirect()->back()->with('confirm', 'Are you sure !');
+      return "done";
     }
 }

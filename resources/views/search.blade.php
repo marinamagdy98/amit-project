@@ -17,9 +17,7 @@
                         </div>
                         <div class="product-content">
                             <h3 class="title"><a href="#">{{ $product->product_name }} </a></h3>
-                            <ul class="rating">
-                                <a href="" class="btn btn-primary">buy</a>
-                            </ul>
+                      
                         </div>
                     </div>
                 </div>

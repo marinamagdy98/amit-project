@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     public function index(){
+        //return "done";
         $products=Product::all();
         return view('products',compact('products'));
     }
     public function search(){
         $search_text= $_GET['query'];
-        $products=Product::where('product_name','LIKE','%'. $search_text .'%')->get();
+        $products=Product::where('product_name','LIKE','%'. $search_text)->get();
         return view('search',compact('products'));
     }
+   
 }

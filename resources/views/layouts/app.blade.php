@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -50,13 +51,19 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <div class="container mb-4 mt-4    ">
+                            <form class="input-box w-100" type="get" action="{{url('/search')}}">
+                                <input type="search" class="rounded-pill form-control" name="query" placeholder="Search Here ">
+                                <button type='submit' class='mt-2 ms-5 btn btn-primary'>Search</button>
+                            </form>
+                        </div>
                         <div class="mt-3 me-3">
                             <a href="/cart" class="btn btn-success">Cart 
                                 <span>{{ count((array) session('cart')) }}</span>
                             </a>
                         </div>
                         <div class="mt-3 me-3">
-                            <a href="{{route('products')}}" class="btn btn-success">Products</a>
+                            <a href="{{route('products.index')}}" class="btn btn-success">Products</a>
                         </div>
 
                        
@@ -115,6 +122,25 @@
 <script src="http://code.iconify.design/2/2.1.2/iconify.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(".remove-from-cart").click(function(e) {
+        e.preventDefault();
+        var ele = $(this);
+        if (confirm("Are you sure")) {
+            $.ajax({
+                url: '{{ url('remove-from-cart') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.attr("data-id")
+                },
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
 
 </footer>
 </html>

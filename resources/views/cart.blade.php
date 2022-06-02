@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@if (session('removeItem'))
+    <div class="alert alert-warning">
+        {{ session('removeItem') }}
+    </div>
+@endif
 
 @section('content')
     <table id="cart" class="container table  ">
@@ -27,12 +32,14 @@
                         <td>{{ $details['product_price'] }}</td>
                         <td>
                             {{ $details['quantity'] }}
+                          
                         </td>
                         <td class="actions" data-th="">
                             <button class="btn btn-danger btn-sm remove-from-cart   " data-id="{{ $id }}"><i
                                     class="fa fa-trash-o"></i></button>
+                             <a href="{{route('removeFromCard',$id)}}" class="btn btn-danger">remove one</a>
                         </td>
-
+                        
                     </tr>
                 @endforeach
             @endif
@@ -47,24 +54,4 @@
         </tfoot>
     </table>
 @endsection
-@section('scripts')
-    <script type="text/javascript">
-        $(".remove-from-cart").click(function(e) {
-            e.preventDefault();
-            var ele = $(this);
-            if (confirm("Are you sure")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.attr("data-id")
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    }
-                });
-            }
-        });
-    </script>
-@endsection
+

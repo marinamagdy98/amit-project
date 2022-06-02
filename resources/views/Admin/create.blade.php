@@ -27,7 +27,7 @@
                       </select>
                   </div>                    <div class="form-group">
                         <label for="exampleInputPassword1">Product Photo</label>
-                        <input type="file" class="form-control" id="exampleInputPassword1" name="product_photo">
+                        <input type="file" class="form-control" id="exampleInputPassword1" name="product_photo" style="width:500; height:500;">
                     </div>
                     <button type="submit" class="btn btn-success">Add Product</button>
                 </form>

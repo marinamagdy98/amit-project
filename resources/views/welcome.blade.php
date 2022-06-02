@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <img src="{{ asset('pagehome/logo3.png') }}" class="img">
-        @auth
+        
             {{-- section_1 --}}
 
             <h2 class="content-hdr text-center text1">Shop By
@@ -149,9 +149,8 @@
                 </div>
 
                 {{-- login button --}}
-            @else
-                <a href="{{ route('login') }}" class="btn btn-success card11">Please Login<a>
-                    @endauth
+           
+                    
 
                     {{-- footer --}}
                     <div class="container">
